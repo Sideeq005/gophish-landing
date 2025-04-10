@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gotcha!</title>
+<style>
+   body {
+     background: linear-gradient(135deg, #1a1a1a, #333);
+     color: #fff;
+     font-family: 'Comic Sans MS', cursive, sans-serif;
+     text-align: center;
+     margin: 0;
+     padding: 0;
+     height: 100vh;
+     overflow: hidden;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+   }
+   h1 {
+     font-size: 5em;
+     margin: 0.2em;
+     animation: popIn 1s ease-out;
+   }
+   p {
+     font-size: 1.5em;
+     max-width: 600px;
+     margin: 0 auto;
+     opacity: 0.9;
+     animation: fadeIn 2s ease-in;
+   }
+   @keyframes popIn {
+     0% { transform: scale(0.5); opacity: 0; }
+     100% { transform: scale(1); opacity: 1; }
+   }
+   @keyframes fadeIn {
+     0% { opacity: 0; }
+     100% { opacity: 0.9; }
+   }
+   .confetti {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     pointer-events: none;
+     top: 0;
+     left: 0;
+   }
+   footer {
+     position: absolute;
+     bottom: 20px;
+     font-size: 0.8em;
+     opacity: 0.6;
+   }
+</style>
+</head>
+<body>
+<h1>Gotcha!</h1>
+<p>You thought you were onto something ... but surprise!.</p>
+<p>This was a simulated phishing test by your Dreamlines IT security team.</p>
+<p>If this had been a real attack, your data could have been compromised.</p>
+<p>Report suspicious emails. Stay safe out there! 💻</p>
+<canvas class="confetti"></canvas>
+<footer>© 2025 Dreamlines IT Team</footer>
+<audio autoplay>
+<source src="https://www.myinstants.com/media/sounds/troll-song.mp3" type="audio/mpeg">
+</audio>
+<script>
+   // Fun Confetti Animation (Minimal)
+   const canvas = document.querySelector('.confetti');
+   const ctx = canvas.getContext('2d');
+   canvas.width = window.innerWidth;
+   canvas.height = window.innerHeight;
+   let pieces = [];
+   for (let i = 0; i < 100; i++) {
+     pieces.push({
+       x: Math.random() * canvas.width,
+       y: Math.random() * canvas.height,
+       size: Math.random() * 10 + 5,
+       color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+       velocity: Math.random() * 2 + 1
+     });
+   }
+   function draw() {
+     ctx.clearRect(0, 0, canvas.width, canvas.height);
+     pieces.forEach(p => {
+       ctx.beginPath();
+       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+       ctx.fillStyle = p.color;
+       ctx.fill();
+       p.y += p.velocity;
+       if (p.y > canvas.height) p.y = -10;
+     });
+     requestAnimationFrame(draw);
+   }
+   draw();
+</script>
+</body>
+</html>
